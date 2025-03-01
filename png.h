@@ -1570,7 +1570,7 @@ PNG_EXPORT(226, void, png_set_text_compression_method, (png_structrp png_ptr,
 
 #ifdef PNG_STDIO_SUPPORTED
 /* Initialize the input/output for the PNG file to the default functions. */
-PNG_EXPORT(74, void, png_init_io, (png_structrp png_ptr, png_FILE_p fp));
+PNG_EXPORT(74, void, png_init_io, (png_structrp png_ptr, FILE *fp));
 #endif
 
 /* Replace the (error and abort), and warning functions with user
@@ -3088,7 +3088,7 @@ PNG_EXPORT(234, int, png_image_begin_read_from_file, (png_imagep image,
     */
 
 PNG_EXPORT(235, int, png_image_begin_read_from_stdio, (png_imagep image,
-   FILE* file));
+   FILE *file));
    /* The PNG header is read from the stdio FILE object. */
 #endif /* STDIO */
 
@@ -3163,7 +3163,7 @@ PNG_EXPORT(239, int, png_image_write_to_file, (png_imagep image,
 PNG_EXPORT(240, int, png_image_write_to_stdio, (png_imagep image, FILE *file,
    int convert_to_8_bit, const void *buffer, png_int_32 row_stride,
    const void *colormap));
-   /* Write the image to the given (FILE*). */
+   /* Write the image to the given FILE object. */
 #endif /* SIMPLIFIED_WRITE_STDIO */
 
 /* With all write APIs if image is in one of the linear formats with 16-bit

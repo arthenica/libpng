@@ -700,7 +700,7 @@ png_get_io_ptr(png_const_structrp png_ptr)
  * function of your own because "FILE *" isn't necessarily available.
  */
 void PNGAPI
-png_init_io(png_structrp png_ptr, png_FILE_p fp)
+png_init_io(png_structrp png_ptr, FILE *fp)
 {
    png_debug(1, "in png_init_io");
 
@@ -3969,7 +3969,7 @@ png_image_free_function(png_voidp argument)
 #  ifdef PNG_STDIO_SUPPORTED
       if (cp->owned_file != 0)
       {
-         FILE *fp = png_voidcast(FILE*, cp->png_ptr->io_ptr);
+         FILE *fp = png_voidcast(FILE *, cp->png_ptr->io_ptr);
          cp->owned_file = 0;
 
          /* Ignore errors here. */

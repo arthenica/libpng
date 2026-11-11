@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.14...4.4)
 
 set(PNGLIB_MAJOR 1)
 set(PNGLIB_MINOR 6)
-set(PNGLIB_REVISION 59)
+set(PNGLIB_REVISION 60)
 #set(PNGLIB_SUBREVISION 0)
 set(PNGLIB_SUBREVISION "git")
 set(PNGLIB_VERSION ${PNGLIB_MAJOR}.${PNGLIB_MINOR}.${PNGLIB_REVISION})
@@ -630,6 +630,9 @@ set(pngstest_sources
 set(pnggetset_sources
     contrib/libtests/pnggetset.c
 )
+set(pngreadend_sources
+    contrib/libtests/pngreadend.c
+)
 set(pngunknown_sources
     contrib/libtests/pngunknown.c
 )
@@ -800,6 +803,17 @@ if(PNG_TESTS AND PNG_SHARED)
 
   png_add_test(NAME pnggetset
                COMMAND pnggetset)
+
+  # pngreadend test:
+  # Reading the end of a PNG without reading the image.
+  add_executable(pngreadend ${pngreadend_sources})
+  target_link_libraries(pngreadend
+                        PRIVATE png_shared)
+
+  png_add_test(NAME pngreadend
+               COMMAND pngreadend
+               FILES "${CMAKE_CURRENT_SOURCE_DIR}/contrib/testpngs/crashers/stale_zTXt_input.png"
+                     "${CMAKE_CURRENT_SOURCE_DIR}/contrib/testpngs/crashers/stale_iCCP_input.png")
 
   # pngvalid tests:
   # Internal validation of standard and progressive reading,
